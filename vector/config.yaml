@@ -1,0 +1,51 @@
+name: "Vector"
+description: "Vector observability data pipeline — collect, transform, and route logs"
+version: "0.0.1"
+slug: "vector"
+image: "ghcr.io/twiebe/hassos-addons-vector-{arch}"
+arch:
+  - aarch64
+  - amd64
+init: false
+journald: true
+map:
+  - type: addon_config
+    path: /config
+
+options:
+  debug_mode: false
+
+  transforms:
+    lowercase_fields: false
+    rename_host_field: false
+    host_field_name: "hostname"
+
+  sink_type: "victorialogs"
+  sink_victorialogs:
+    endpoint: ""
+    auth_user: ""
+    auth_password: ""
+    stream_fields: ""
+    ignore_fields: ""
+
+  override_config: false
+  override_config_path: "/config/vector.yaml"
+
+schema:
+  debug_mode: bool
+
+  transforms:
+    lowercase_fields: bool
+    rename_host_field: bool
+    host_field_name: str?
+
+  sink_type: list(victorialogs)
+  sink_victorialogs:
+    endpoint: str
+    auth_user: str?
+    auth_password: password?
+    stream_fields: str?
+    ignore_fields: str?
+
+  override_config: bool
+  override_config_path: str?

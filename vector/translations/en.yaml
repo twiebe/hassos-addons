@@ -1,0 +1,43 @@
+configuration:
+  debug_mode:
+    name: Debug Mode
+    description: Enable verbose debug logging for Vector (useful for troubleshooting connectivity and config issues)
+  transforms:
+    name: Transformations
+    fields:
+      lowercase_fields:
+        name: Lowercase Field Names
+        description: Transform all log field names to lowercase before forwarding
+      rename_host_field:
+        name: Rename Host Field
+        description: Rename Vector's default "host" field to a custom name
+      host_field_name:
+        name: Host Field Name
+        description: The field name to use instead of "host" (e.g. "hostname")
+  sink_type:
+    name: Sink Type
+    description: The type of sink to forward logs to
+  sink_victorialogs:
+    name: VictoriaLogs Sink
+    fields:
+      endpoint:
+        name: Endpoint URL
+        description: URL of the VictoriaLogs endpoint
+      auth_user:
+        name: Auth Username
+        description: Username for basic authentication (leave empty to disable auth)
+      auth_password:
+        name: Auth Password
+        description: Password for basic authentication
+      stream_fields:
+        name: Stream Fields
+        description: "Comma-separated fields used to group logs into streams. Leave empty to auto-generate based on active transforms: uses the host field name and container_name (or CONTAINER_NAME if lowercase is disabled)"
+      ignore_fields:
+        name: Ignore Fields
+        description: Comma-separated fields to drop before forwarding (e.g. "log.offset,event.original")
+  override_config:
+    name: Override Config
+    description: If enabled, all other options are ignored and the file at Override Config Path is used as the Vector config directly
+  override_config_path:
+    name: Override Config Path
+    description: Path to a custom Vector configuration file within the addon config directory (default /config/vector.yaml)
