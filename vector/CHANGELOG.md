@@ -1,3 +1,3 @@
-## 0.0.1
+## 0.1.0
 
-- Initial release supporting VictoriaLogs
+- Initial release supporting VictoriaLogs and Loki
