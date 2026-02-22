@@ -35,6 +35,24 @@ configuration:
       ignore_fields:
         name: Ignore Fields
         description: Comma-separated fields to drop before forwarding (e.g. "log.offset,event.original")
+  sink_loki:
+    name: Loki Sink
+    fields:
+      endpoint:
+        name: Endpoint URL
+        description: URL of the Loki endpoint (e.g. https://logs-prod-us-central1.grafana.net)
+      auth_user:
+        name: Auth Username
+        description: Username for basic authentication — for Grafana Cloud this is your numeric org ID
+      auth_password:
+        name: Auth Password
+        description: Password for basic authentication — for Grafana Cloud this is your API token
+      tenant_id:
+        name: Tenant ID
+        description: "Sets the X-Scope-OrgID header — required for Grafana Cloud and multi-tenant Loki deployments"
+      encoding:
+        name: Encoding
+        description: "text sends only the log message as the log line (clean, human-readable); json sends the full event as a JSON object (all fields preserved, query with | json in LogQL)"
   override_config:
     name: Override Config
     description: If enabled, all other options are ignored and the file at Override Config Path is used as the Vector config directly

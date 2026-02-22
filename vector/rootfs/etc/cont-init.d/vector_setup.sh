@@ -43,6 +43,11 @@ jq -n \
     --arg     vl_auth_password   "$(bashio::config 'sink_victorialogs.auth_password' 2>/dev/null || echo '')" \
     --arg     vl_stream_fields   "$(bashio::config 'sink_victorialogs.stream_fields' 2>/dev/null || echo '')" \
     --arg     vl_ignore_fields   "$(bashio::config 'sink_victorialogs.ignore_fields' 2>/dev/null || echo '')" \
+    --arg     loki_endpoint      "$(bashio::config 'sink_loki.endpoint'              2>/dev/null || echo '')" \
+    --arg     loki_auth_user     "$(bashio::config 'sink_loki.auth_user'             2>/dev/null || echo '')" \
+    --arg     loki_auth_password "$(bashio::config 'sink_loki.auth_password'         2>/dev/null || echo '')" \
+    --arg     loki_tenant_id     "$(bashio::config 'sink_loki.tenant_id'             2>/dev/null || echo '')" \
+    --arg     loki_encoding      "$(bashio::config 'sink_loki.encoding'              2>/dev/null || echo 'text')" \
     '{
         lowercase_fields:   $lowercase_fields,
         rename_host_field:  $rename_host_field,
@@ -52,7 +57,12 @@ jq -n \
         vl_auth_user:       $vl_auth_user,
         vl_auth_password:   $vl_auth_password,
         vl_stream_fields:   $vl_stream_fields,
-        vl_ignore_fields:   $vl_ignore_fields
+        vl_ignore_fields:   $vl_ignore_fields,
+        loki_endpoint:      $loki_endpoint,
+        loki_auth_user:     $loki_auth_user,
+        loki_auth_password: $loki_auth_password,
+        loki_tenant_id:     $loki_tenant_id,
+        loki_encoding:      $loki_encoding
     }' \
 | tempio \
     -template "${TEMPLATE_FILE}" \

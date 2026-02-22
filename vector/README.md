@@ -28,7 +28,7 @@ The two transforms are independent and can be combined. When both are enabled, l
 
 ### VictoriaLogs
 
-The only currently supported sink is [VictoriaLogs](https://docs.victoriametrics.com/victorialogs/). VictoriaLogs exposes an Elasticsearch-compatible bulk ingest API, which is what Vector uses under the hood — the sink type in Vector's config is `elasticsearch`, but the addon models this honestly as `victorialogs` since the configuration (in particular the `query` parameters) is specific to VictoriaLogs and not portable to plain Elasticsearch or OpenSearch.
+[VictoriaLogs](https://docs.victoriametrics.com/victorialogs/) exposes an Elasticsearch-compatible bulk ingest API, which is what Vector uses under the hood — the sink type in Vector's config is `elasticsearch`, but the addon models this honestly as `victorialogs` since the configuration (in particular the `query` parameters) is specific to VictoriaLogs and not portable to plain Elasticsearch or OpenSearch.
 
 The following VictoriaLogs-specific query parameters are always set in the generated config:
 
@@ -40,17 +40,28 @@ The following VictoriaLogs-specific query parameters are always set in the gener
 
 `_stream_fields` is auto-generated based on the active transforms: it uses the host field name (as renamed, if applicable) and `container_name` or `CONTAINER_NAME` depending on whether lowercase is enabled. You can override this by setting the Stream Fields option explicitly.
 
-#### Options
-
 Compression is fixed at `gzip` and the Elasticsearch healthcheck is disabled — VictoriaLogs does not expose that endpoint.
 
-| Option | Default | Description |
-|---|---|---|
-| Endpoint URL | — | Full URL of your VictoriaLogs ingest endpoint |
-| Auth Username | — | Basic auth username (leave empty to disable) |
-| Auth Password | — | Basic auth password |
-| Stream Fields | — | Override the auto-generated `_stream_fields` value |
-| Ignore Fields | — | Comma-separated list of fields to drop before forwarding (e.g. `log.offset,event.original`) |
+| Option | Description |
+|---|---|
+| Endpoint URL | Full URL of your VictoriaLogs ingest endpoint |
+| Auth Username | Basic auth username (leave empty to disable) |
+| Auth Password | Basic auth password |
+| Stream Fields | Override the auto-generated `_stream_fields` value |
+| Ignore Fields | Comma-separated list of fields to drop before forwarding (e.g. `log.offset,event.original`) |
+
+### Loki
+
+[Loki](https://grafana.com/oss/loki/) is supported via Vector's native `loki` sink. This includes [Grafana Cloud](https://grafana.com/products/cloud/) hosted Loki.
+
+Stream labels are auto-generated from the active transforms using the same logic as VictoriaLogs stream fields: the host field name and `container_name` / `CONTAINER_NAME` depending on whether lowercase is enabled. Fields used as labels are removed from the log body to avoid duplication. Encoding is fixed at JSON, compression at `gzip`.
+
+| Option | Description |
+|---|---|
+| Endpoint URL | Full URL of your Loki endpoint (e.g. `https://logs-prod-us-central1.grafana.net`) |
+| Auth Username | Basic auth username — for Grafana Cloud this is your numeric org ID |
+| Auth Password | Basic auth password — for Grafana Cloud this is your API token |
+| Tenant ID | Sets the `X-Scope-OrgID` header — required for Grafana Cloud and multi-tenant Loki deployments |
 
 ## Config override
 
@@ -60,6 +71,6 @@ The override file lives in the addon's own config directory, which Home Assistan
 
 When override mode is active, **all other addon options are ignored entirely** — the addon copies your file directly to the Vector config location and starts Vector with it. The generated config is not written and no transforms are applied. The override file is still printed to the addon log at startup (with passwords obfuscated).
 
-This is useful when you need sources or sinks not yet supported by the addon (e.g. Loki, additional inputs, complex routing), or when you need full control over the Vector topology.
+This is useful when you need additional inputs, complex routing, or full control over the Vector topology.
 
 The override file must be a valid [Vector configuration file](https://vector.dev/docs/reference/configuration/).
