@@ -1,5 +1,6 @@
 name: "Vector"
 description: "Vector observability data pipeline — collect, transform, and route logs"
+url: "https://github.com/twiebe/hassos-addons-vector"
 version: "0.1.0"
 slug: "vector"
 image: "ghcr.io/twiebe/hassos-addons-vector-{arch}"
