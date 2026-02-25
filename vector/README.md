@@ -74,3 +74,7 @@ When override mode is active, **all other addon options are ignored entirely** â
 This is useful when you need additional inputs, complex routing, or full control over the Vector topology.
 
 The override file must be a valid [Vector configuration file](https://vector.dev/docs/reference/configuration/).
+
+## Source
+
+The source code for this addon is available at [github.com/twiebe/hassos-addons-vector](https://github.com/twiebe/hassos-addons-vector).
