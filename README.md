@@ -14,6 +14,16 @@ Or add it manually: go to **Settings → Add-ons → Add-on Store**, open the ov
 https://github.com/twiebe/hassos-addons
 ```
 
+## Development Setup
+
+After cloning the repository, install the git hooks to ensure CHANGELOG.md is updated whenever a version bump occurs in an addon's `config.yaml`:
+
+```bash
+./hooks/install.sh
+```
+
+This installs a pre-commit hook that blocks commits where the version in `config.yaml` was changed but `CHANGELOG.md` was not updated accordingly.
+
 ## Add-ons
 
 ### [Vector](vector/README.md)
