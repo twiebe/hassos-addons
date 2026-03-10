@@ -1,0 +1,43 @@
+#!/bin/bash
+# Checks: if config.yaml version was bumped, CHANGELOG.md must also be updated
+
+changed_configs=$(git diff --cached --name-only | grep 'config\.yaml$')
+
+if [ -z "$changed_configs" ]; then
+  exit 0
+fi
+
+error=0
+
+for config_file in $changed_configs; do
+  addon_dir=$(dirname "$config_file")
+  changelog_file="$addon_dir/CHANGELOG.md"
+
+  # Extract old and new version from config.yaml
+  old_version=$(git show HEAD:"$config_file" 2>/dev/null | grep '^version:' | awk '{print $2}' | tr -d '"'"'" || echo "")
+  new_version=$(git show :"$config_file" 2>/dev/null | grep '^version:' | awk '{print $2}' | tr -d '"'"'" || echo "")
+
+  if [ "$old_version" = "$new_version" ]; then
+    continue  # Version unchanged, no check needed
+  fi
+
+  echo "Version changed in $config_file: $old_version -> $new_version"
+
+  # Is CHANGELOG.md staged?
+  if ! git diff --cached --name-only | grep -q "^$changelog_file$"; then
+    echo "ERROR: $changelog_file was not updated!"
+    echo "  Please add an entry for version $new_version to $changelog_file."
+    error=1
+    continue
+  fi
+
+  # Does the CHANGELOG.md mention the new version?
+  if ! git show :"$changelog_file" 2>/dev/null | grep -q "$new_version"; then
+    echo "ERROR: Version $new_version not found in $changelog_file!"
+    error=1
+  else
+    echo "OK: $changelog_file updated for version $new_version"
+  fi
+done
+
+exit $error
