@@ -1,3 +1,7 @@
+## 0.3.0
+
+- Bump vector to 0.55.0
+
 ## 0.2.0
 
 - Bump vector to 0.54.0
