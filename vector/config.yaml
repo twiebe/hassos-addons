@@ -36,7 +36,7 @@ options:
     encoding: "text"
 
   override_config: false
-  override_config_path: "/config/vector.yaml"
+  override_config_path: "vector.yaml"
 
 schema:
   debug_mode: bool
