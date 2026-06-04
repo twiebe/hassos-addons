@@ -58,4 +58,4 @@ configuration:
     description: If enabled, all other options are ignored and the file at Override Config Path is used as the Vector config directly
   override_config_path:
     name: Override Config Path
-    description: Path to a custom Vector configuration file within the addon config directory (default /config/vector.yaml)
+    description: Path to a custom Vector configuration file within the addon config directory (default vector.yaml)

@@ -65,7 +65,7 @@ Stream labels are auto-generated from the active transforms using the same logic
 
 ## Config override
 
-For use cases not covered by the addon options, you can supply a handwritten Vector configuration file. Enable **Override Config** and set **Override Config Path** to the path of your file (default: `/config/vector.yaml`).
+For use cases not covered by the addon options, you can supply a handwritten Vector configuration file. Enable **Override Config** and set **Override Config Path** to the path of your file (default: `vector.yaml`).
 
 The override file lives in the addon's own config directory, which Home Assistant mounts from `/addon_configs/{repo}_vector/` on the host. You can manage files there via the Samba addon or the Studio Code Server addon.
 
