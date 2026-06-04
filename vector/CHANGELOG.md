@@ -1,3 +1,8 @@
+## 0.4.0
+
+- Bump vector to 0.56.0
+- Accept both relative and absolute paths as `override_config_path`
+
 ## 0.3.0
 
 - Bump vector to 0.55.0
