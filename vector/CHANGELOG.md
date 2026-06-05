@@ -2,6 +2,7 @@
 
 - Bump vector to 0.56.0
 - Accept both relative and absolute paths as `override_config_path`
+- Be clearer on where to put `vector.yaml` for advanced configuration. The previous default value of `/config/vector.yaml` was misleading. ([#12](https://github.com/twiebe/hassos-addons-vector/issues/12))
 
 ## 0.3.0
 
