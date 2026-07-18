@@ -1,3 +1,8 @@
+## 0.5.0
+
+- Bump vector to 0.57.0
+- Enable `dangerously_allow_unconfined_template_resolution` to preserve loki labeling
+
 ## 0.4.0
 
 - Bump vector to 0.56.0
