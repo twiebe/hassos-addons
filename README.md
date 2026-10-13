@@ -1,4 +1,4 @@
-# Thomas Wiebe Home Assistant Add-ons
+# Home Assistant Add-ons by Thomas Wiebe
 
 A collection of Home Assistant OS add-ons.
 
