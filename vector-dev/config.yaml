@@ -1,7 +1,7 @@
 name: "Vector (dev)"
 description: "Vector observability data pipeline — collect, transform, and route logs"
 url: "https://github.com/twiebe/hassos-addons-vector"
-version: "dev-91e01ed"
+version: "dev-f771389"
 slug: "vector_dev"
 stage: experimental
 advanced: true
