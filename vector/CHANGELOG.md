@@ -1,3 +1,8 @@
+## 0.8.0
+
+- Bump vector to 0.60.0
+- Update hassio-addons base image to v9.5.1
+
 ## 0.7.0
 
 - Bump vector to 0.59.0
