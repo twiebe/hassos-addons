@@ -31,7 +31,7 @@ Each add-on has a dev twin, e.g. `vector-dev/` next to `vector/`. It shows up as
 All work happens in the dev twin, including the changelog entry under `## <version>`. `vector/` only changes through a release:
 
 ```bash
-make release VERSION=0.8.0   # checks changelog and release image, copies vector-dev/ to vector/, commits
+make release ADDON=vector VERSION=0.8.0   # checks changelog and release image, copies vector-dev/ to vector/, commits
 git push
 ```
 
