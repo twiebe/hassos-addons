@@ -21,6 +21,10 @@ for config_file in $changed_configs; do
     continue  # Version unchanged, no check needed
   fi
 
+  case "$new_version" in
+    dev*) continue ;;  # Dev twin pointing at a new dev build, changelog follows on release
+  esac
+
   echo "Version changed in $config_file: $old_version -> $new_version"
 
   # Is CHANGELOG.md staged?

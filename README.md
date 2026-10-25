@@ -22,7 +22,20 @@ After cloning the repository, install the git hooks to ensure CHANGELOG.md is up
 ./hooks/install.sh
 ```
 
-This installs a pre-commit hook that blocks commits where the version in `config.yaml` was changed but `CHANGELOG.md` was not updated accordingly.
+This installs a pre-commit hook that blocks commits where the version in `config.yaml` was changed but `CHANGELOG.md` was not updated accordingly. Dev versions (`dev-*`) are exempt.
+
+## Dev Add-ons and Releases
+
+Each add-on has a dev twin, e.g. `vector-dev/` next to `vector/`. It shows up as **Vector (dev)** for users with advanced mode enabled and tracks the `dev` branch of the add-on's source repo. Every dev build sets its version to `dev-<short sha>`, so Home Assistant offers it as an update.
+
+All work happens in the dev twin, including the changelog entry under `## <version>`. `vector/` only changes through a release:
+
+```bash
+make release VERSION=0.8.0   # checks changelog and release image, copies vector-dev/ to vector/, commits
+git push
+```
+
+Run `make` for all targets. `make dev-bump` points the dev twin at the latest dev build by hand.
 
 ## Add-ons
 
