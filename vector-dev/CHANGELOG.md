@@ -1,3 +1,14 @@
+## 0.9.0
+
+- Bump vector to 0.61.0 ([release notes](https://vector.dev/releases/0.61.0/))
+- Update hassio-addons base image to v9.5.2
+
+Generated configs need no changes. If you use a config override, check these:
+
+- `vector` sink: endpoints without a scheme now use `https`. Set `http://` explicitly for plaintext.
+- VRL: `to_unix_timestamp` with `unit: "nanoseconds"` now needs error handling, or Vector won't start.
+- Ignored config fields now log a deprecation warning. A future Vector release will reject them.
+
 ## 0.8.0
 
 - Bump vector to 0.60.0
