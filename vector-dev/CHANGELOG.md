@@ -1,3 +1,7 @@
+## 0.10.0
+
+- Bump vector to 0.62.0 ([release notes](https://vector.dev/releases/0.62.0/))
+
 ## 0.9.0
 
 - Bump vector to 0.61.0 ([release notes](https://vector.dev/releases/0.61.0/))
